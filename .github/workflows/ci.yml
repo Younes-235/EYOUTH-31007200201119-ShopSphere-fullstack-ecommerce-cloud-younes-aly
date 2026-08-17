@@ -1,0 +1,43 @@
+name: CI - Test, Build, Seed
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  test-and-seed:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: backend
+
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      MONGO_URI: ${{ secrets.MONGO_URI }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Generate Prisma Client
+        run: npx prisma generate
+
+      - name: Run tests
+        run: npm test
+
+      - name: Reset and seed production DB
+        if: success()
+        run: |
+          npx prisma db push --force-reset --accept-data-loss
+          npm run seed
