@@ -5,8 +5,7 @@ import styles from './ActivityLogs.module.css';
 const fetchActivityLogs = async () => {
   const token = localStorage.getItem('token');
   if (!token) throw new Error('Authentication token missing. Please log in again.');
-
-  const res = await fetch('http://localhost:5000/api/logs', {
+  const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/logs`, {
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,

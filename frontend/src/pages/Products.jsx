@@ -197,7 +197,7 @@ const Products = () => {
                             <div key={product.id} className={styles.card} onClick={() => navigate(`/products/${product.id}`)}>
                                 <div className={styles.imagePlaceholder}>
                                     {product.imageUrl ? (
-                                        <img src={`http://localhost:5000${product.imageUrl}`} alt={product.name} className={styles.productImage} />
+                                        <img src={`${(import.meta.env.VITE_API_URL || 'http://localhost:5000/api').replace('/api', '')}${product.imageUrl}`} alt={product.name} className={styles.productImage} />
                                     ) : (
                                         <span className={styles.noImgText}>No Image Available</span>
                                     )}

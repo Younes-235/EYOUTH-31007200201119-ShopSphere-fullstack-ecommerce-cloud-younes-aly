@@ -139,7 +139,7 @@ const ProductDetail = () => {
             <div className={styles.mainLayout}>
                 <div className={styles.imageSection}>
                     {product.imageUrl ? (
-                        <img src={`http://localhost:5000${product.imageUrl}`} alt={product.name} />
+                        <img src={`${(import.meta.env.VITE_API_URL || 'http://localhost:5000/api').replace('/api', '')}${product.imageUrl}`} alt={product.name} />
                     ) : (
                         <div className={styles.noImage}>No Image Available</div>
                     )}
