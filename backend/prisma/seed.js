@@ -56,7 +56,7 @@ async function main() {
       price: 99.99,
       category: 'Electronics',
       stock: 50,
-      imageUrl: '/uploads/headphones.jpg',
+      imageUrl: 'https://ikzehosejzzrjqfykfoa.supabase.co/storage/v1/object/public/product-images/headphones.jpg',
     },
   });
 
