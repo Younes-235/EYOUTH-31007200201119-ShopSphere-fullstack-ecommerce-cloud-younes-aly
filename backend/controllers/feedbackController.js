@@ -1,4 +1,7 @@
-const Feedback = require('../models/Feedback');
+const axios = require('axios');
+
+// Points to your independently deployed review service URL
+const REVIEW_SERVICE_URL = process.env.REVIEW_SERVICE_URL || 'http://localhost:5001';
 
 // POST /api/products/:id/reviews
 exports.addFeedback = async (req, res) => {
@@ -9,16 +12,18 @@ exports.addFeedback = async (req, res) => {
         const userId = req.user.id; 
         const username = req.user.name || "Anonymous"; 
 
-        const newFeedback = await Feedback.create({
+        // Forward via REST to the independent review service
+        const response = await axios.post(`${REVIEW_SERVICE_URL}/api/reviews`, {
             productId,
             userId,
             username,
             rating: Number(rating),
-            comment: comment
+            comment
         });
 
-        res.status(201).json({ message: 'Feedback submitted successfully!', feedback: newFeedback });
+        res.status(201).json({ message: 'Feedback submitted successfully!', feedback: response.data });
     } catch (error) {
+        console.error('Error forwarding review to microservice:', error.message);
         res.status(500).json({ error: 'Failed to save feedback' });
     }
 };
@@ -28,10 +33,12 @@ exports.getProductFeedback = async (req, res) => {
     try {
         const productId = parseInt(req.params.id);
         
-        const reviews = await Feedback.find({ productId }).sort({ createdAt: -1 });
+        // Fetch via REST from the independent review service
+        const response = await axios.get(`${REVIEW_SERVICE_URL}/api/reviews?productId=${productId}`);
         
-        res.status(200).json(reviews);
+        res.status(200).json(response.data);
     } catch (error) {
+        console.error('Error fetching reviews from microservice:', error.message);
         res.status(500).json({ error: 'Failed to fetch reviews' });
     }
 };
