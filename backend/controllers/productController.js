@@ -1,7 +1,9 @@
 const prisma = require('../config/db.js');
 const supabase = require('../config/supabase.js');
-const Feedback = require('../models/Feedback.js'); 
+const axios = require('axios');
 const logActivity = require('../utils/logger.js');
+
+const REVIEW_SERVICE_URL = process.env.REVIEW_SERVICE_URL || 'http://localhost:5001';
 
 exports.getAllProducts = async (req, res) => {
     try {
@@ -202,7 +204,11 @@ exports.deleteProduct = async (req, res, next) => {
             where: { productId: productId }
         });
 
-        await Feedback.deleteMany({ productId: productId });
+        try {
+            await axios.delete(`${REVIEW_SERVICE_URL}/api/reviews?productId=${productId}`);
+        } catch (reviewError) {
+            console.error('Failed to delete reviews from microservice:', reviewError.message);
+        }
 
         const deletedProduct = await prisma.product.delete({
             where: { id: productId }
