@@ -36,7 +36,7 @@ exports.getUserProfile = async (req, res) => {
         }
 
         if (!user) {
-            return res.status(404).json({ error: 'User not found. Please log out and log in again.' });
+            return res.status(401).json({ error: 'User account not found. Please log in again.' });
         }
 
         res.status(200).json(user);
