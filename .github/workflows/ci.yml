@@ -16,11 +16,11 @@ jobs:
 
     env:
       NODE_ENV: test
-      JWT_SECRET: ${{ secrets.JWT_SECRET || 'test_jwt_secret_key' }}
-      DATABASE_URL: ${{ secrets.DATABASE_URL }}
-      MONGO_URI: ${{ secrets.MONGO_URI }}
-      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+      JWT_SECRET: ${{ secrets.JWT_SECRET || 'super_secret_test_jwt_key_123' }}
+      DATABASE_URL: ${{ secrets.DATABASE_URL || 'postgresql://postgres:postgres@localhost:5432/testdb?schema=public' }}
+      MONGO_URI: ${{ secrets.MONGO_URI || 'mongodb://localhost:27017/testdb' }}
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL || 'https://mock.supabase.co' }}
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY || 'mock-service-role-key' }}
 
     steps:
       - name: Checkout Repository
