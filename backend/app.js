@@ -11,8 +11,11 @@ const userRouter = require('./routes/userRoutes');
 const statsRoutes = require('./routes/stats');
 const activityLogRoutes = require('./routes/activityLogRoute'); 
 const errorHandler = require("./middleware/errorMiddleware");
+const structuredLogger = require("./middleware/structuredLogger");
 
 const app = express();
+
+app.use(structuredLogger);
 
 app.use(helmet({
     crossOriginResourcePolicy: { policy: "cross-origin" },
