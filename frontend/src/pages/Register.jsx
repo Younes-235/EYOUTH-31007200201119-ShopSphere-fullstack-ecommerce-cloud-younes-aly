@@ -29,14 +29,15 @@ const Register = () => {
             queryClient.invalidateQueries({ queryKey: ['adminStats'] });
             queryClient.invalidateQueries({ queryKey: ['users'] });
 
-            setSuccess('Account registered successfully! Welcome email has been dispatched via Serverless Function.');
+            setSuccess('Account created successfully!');
             if (res.data?.emailPreviewUrl) {
                 setEmailPreviewUrl(res.data.emailPreviewUrl);
             }
             
-            setTimeout(() => {
-                navigate('/login');
-            }, 6000);
+            // Clear input fields on success
+            setName('');
+            setEmail('');
+            setPassword('');
         } catch (err) {
             setError(err.response?.data?.error || err.response?.data?.message || 'Registration failed. Try again.');
         } finally {
@@ -48,19 +49,20 @@ const Register = () => {
         <div className={styles.card}>
             <h2>Create Account</h2>
             {error && <div className={styles.error}>{error}</div>}
+            
             {success && (
                 <div className={styles.successBox}>
                     <p className={styles.successTitle}>🎉 {success}</p>
                     {emailPreviewUrl && (
                         <div className={styles.emailNotification}>
-                            <span>📧 <strong>Serverless Email Dispatched:</strong></span>
+                            <span>📧 <strong>Welcome email dispatched via Serverless Function</strong></span>
                             <a 
                                 href={emailPreviewUrl} 
                                 target="_blank" 
                                 rel="noopener noreferrer" 
                                 className={styles.emailPreviewBtn}
                             >
-                                🔗 Open Sent Email Preview (Ethereal) &rarr;
+                                🔗 View Sent Email (Ethereal Inbox) &rarr;
                             </a>
                         </div>
                     )}
@@ -69,7 +71,7 @@ const Register = () => {
                         onClick={() => navigate('/login')} 
                         className={styles.loginRedirectBtn}
                     >
-                        Proceed to Login Now
+                        Proceed to Sign In &rarr;
                     </button>
                 </div>
             )}
@@ -104,7 +106,7 @@ const Register = () => {
                 </select>
 
                 <button type="submit" disabled={loading}>
-                    {loading ? 'Registering & Dispatching Email...' : 'Register Account'}
+                    {loading ? 'Registering...' : 'Register Account'}
                 </button>
             </form>
 
