@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const bcrypt = require("bcryptjs");
 const prisma = new PrismaClient();
 
-const Feedback = require('../models/Feedback'); 
 const ActivityLog = require('../models/ActivityLog'); 
 
 async function main() {
@@ -12,7 +11,7 @@ async function main() {
   if (mongoose.connection.readyState === 0) {
     const mongoUri = process.env.MONGO_URI; 
     await mongoose.connect(mongoUri);
-    console.log('🔌 Connected to MongoDB...');
+    console.log('🔌 Connected to MongoDB for Activity Logs...');
   }
 
   console.log('🧹 Cleaning old records...');
@@ -23,7 +22,6 @@ async function main() {
   await prisma.product.deleteMany({});
   await prisma.user.deleteMany({});
 
-  await Feedback.deleteMany({});
   await ActivityLog.deleteMany({});
 
   console.log('👤 Seeding users (Customer & Admin)...');
@@ -73,15 +71,6 @@ async function main() {
       productId: product1.id,
       quantity: 2,
     },
-  });
-
-  console.log('💬 Seeding MongoDB feedback...');
-  await Feedback.create({
-    productId: product1.id,
-    userId: customer.id,
-    username: customer.name,
-    rating: 5,
-    comment: 'Amazing sound quality, highly recommend!',
   });
 
   console.log('✅ Seeding completed successfully!');

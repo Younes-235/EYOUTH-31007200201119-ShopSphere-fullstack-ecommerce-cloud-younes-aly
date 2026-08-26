@@ -26,17 +26,32 @@ services:
     volumes:
       - mongo_data:/data/db
 
+  review_service:
+    build: ./ShopSphere-review-service
+    container_name: l5_review_service
+    restart: always
+    ports:
+      - "5001:5001"
+    environment:
+      - PORT=5001
+      - MONGO_URI=mongodb://rootuser:rootpassword@mongo_db:27017/my_document_db?authSource=admin
+    depends_on:
+      - mongo_db
+
   backend_api:
     build: ./backend
     container_name: l5_backend
     restart: always
     ports:
       - "5000:5000"
+    environment:
+      - REVIEW_SERVICE_URL=http://review_service:5001
     env_file:
       - ./backend/.env
     depends_on:
       - postgres_db
       - mongo_db
+      - review_service
     volumes:
       - backend_uploads:/usr/src/app/public/uploads
     command: >

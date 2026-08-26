@@ -1,0 +1,12 @@
+{
+  "name": "shopsphere-serverless-email",
+  "version": "1.0.0",
+  "description": "Vercel Serverless Function for ShopSphere background email notifications",
+  "main": "api/send-welcome-email.js",
+  "scripts": {
+    "start": "node api/send-welcome-email.js"
+  },
+  "dependencies": {
+    "nodemailer": "^6.9.16"
+  }
+}

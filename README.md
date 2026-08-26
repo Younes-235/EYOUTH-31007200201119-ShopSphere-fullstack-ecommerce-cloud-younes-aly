@@ -75,7 +75,9 @@ Built with **React, Node.js, Express, Prisma ORM, PostgreSQL, MongoDB, Docker, a
 | -------- | --- |
 | Frontend | http://localhost:5173 |
 | Backend API | http://localhost:5000/api |
-| Health Check | http://localhost:5000/health |
+| Review Microservice | http://localhost:5001/api/reviews |
+| Serverless Email Function | http://localhost:3000/api/send-welcome-email |
+| Health Checks | http://localhost:5000/health (Backend), http://localhost:5001/health (Reviews) |
 
 ---
 
