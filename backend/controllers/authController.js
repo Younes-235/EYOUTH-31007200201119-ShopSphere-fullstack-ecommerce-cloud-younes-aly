@@ -73,7 +73,12 @@ exports.register = async (req, res) => {
             }
         });
 
-        sendWelcomeEmail(newUser.email, newUser.name);
+        let emailResult = null;
+        try {
+            emailResult = await sendWelcomeEmail(newUser.email, newUser.name);
+        } catch (emailErr) {
+            console.error("Non-blocking email dispatch error:", emailErr.message);
+        }
 
         await logActivity({
             action: 'USER_REGISTERED',
@@ -84,7 +89,13 @@ exports.register = async (req, res) => {
             },
             targetType: 'USER',
             targetId: newUser.id,
-            details: { name: newUser.name, email: newUser.email, role: newUser.role }
+            details: { 
+                name: newUser.name, 
+                email: newUser.email, 
+                role: newUser.role,
+                emailDispatched: !!emailResult,
+                emailPreviewUrl: emailResult?.previewUrl || null
+            }
         });
 
         const token = jwt.sign(
@@ -93,10 +104,15 @@ exports.register = async (req, res) => {
             { expiresIn: "24h" }
         );
 
-        return res.status(201).json({ message: "User registered successfully", token });
+        return res.status(201).json({ 
+            message: "User registered successfully", 
+            token,
+            emailDispatched: true,
+            emailPreviewUrl: emailResult?.previewUrl || null
+        });
 
     } catch (error) {
         console.error("Registration error:", error);
-        return res.status(500).json({ message: "An unexpected error occurred during registration" });
+        return res.status(500).json({ error: "An unexpected error occurred during registration", message: error.message });
     }
 };

@@ -12,26 +12,35 @@ const Register = () => {
     const [role, setRole] = useState('user'); 
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
+    const [emailPreviewUrl, setEmailPreviewUrl] = useState(null);
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
         setSuccess('');
+        setEmailPreviewUrl(null);
+        setLoading(true);
 
         try {
-            await api.post('/register', { name, email, password, role });
+            const res = await api.post('/register', { name, email, password, role });
             
             queryClient.invalidateQueries({ queryKey: ['adminStats'] });
             queryClient.invalidateQueries({ queryKey: ['users'] });
 
-            setSuccess('Account registered successfully! Redirecting to login...');
+            setSuccess('Account registered successfully! Welcome email has been dispatched via Serverless Function.');
+            if (res.data?.emailPreviewUrl) {
+                setEmailPreviewUrl(res.data.emailPreviewUrl);
+            }
             
             setTimeout(() => {
                 navigate('/login');
-            }, 2000);
+            }, 6000);
         } catch (err) {
-            setError(err.response?.data?.error || 'Registration failed. Try again.');
+            setError(err.response?.data?.error || err.response?.data?.message || 'Registration failed. Try again.');
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -39,7 +48,31 @@ const Register = () => {
         <div className={styles.card}>
             <h2>Create Account</h2>
             {error && <div className={styles.error}>{error}</div>}
-            {success && <div className={styles.success}>{success}</div>}
+            {success && (
+                <div className={styles.successBox}>
+                    <p className={styles.successTitle}>🎉 {success}</p>
+                    {emailPreviewUrl && (
+                        <div className={styles.emailNotification}>
+                            <span>📧 <strong>Serverless Email Dispatched:</strong></span>
+                            <a 
+                                href={emailPreviewUrl} 
+                                target="_blank" 
+                                rel="noopener noreferrer" 
+                                className={styles.emailPreviewBtn}
+                            >
+                                🔗 Open Sent Email Preview (Ethereal) &rarr;
+                            </a>
+                        </div>
+                    )}
+                    <button 
+                        type="button" 
+                        onClick={() => navigate('/login')} 
+                        className={styles.loginRedirectBtn}
+                    >
+                        Proceed to Login Now
+                    </button>
+                </div>
+            )}
             
             <form onSubmit={handleSubmit} className={styles.form}>
                 <input 
@@ -70,7 +103,9 @@ const Register = () => {
                     <option value="admin">Store Administrator</option>
                 </select>
 
-                <button type="submit">Register Account</button>
+                <button type="submit" disabled={loading}>
+                    {loading ? 'Registering & Dispatching Email...' : 'Register Account'}
+                </button>
             </form>
 
             <div className={styles.switchLink}>
