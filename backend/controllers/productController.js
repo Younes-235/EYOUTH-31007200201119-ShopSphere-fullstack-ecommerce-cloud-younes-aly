@@ -101,25 +101,29 @@ exports.createProduct = async (req, res) => {
         let imageUrl = null;
 
         if (req.file) {
-            const fileExt = req.file.originalname.split('.').pop();
-            const fileName = `${Date.now()}-${Math.round(Math.random() * 1e9)}.${fileExt}`;
+            if (supabase) {
+                const fileExt = req.file.originalname.split('.').pop();
+                const fileName = `${Date.now()}-${Math.round(Math.random() * 1e9)}.${fileExt}`;
 
-            const { error: uploadError } = await supabase.storage
-                .from('product-images')
-                .upload(fileName, req.file.buffer, {
-                    contentType: req.file.mimetype,
-                });
+                const { error: uploadError } = await supabase.storage
+                    .from('product-images')
+                    .upload(fileName, req.file.buffer, {
+                        contentType: req.file.mimetype,
+                    });
 
-            if (uploadError) {
-                console.error("Supabase upload error:", uploadError);
-                return res.status(500).json({ error: "Failed to upload image" });
+                if (uploadError) {
+                    console.error("Supabase upload error:", uploadError);
+                    return res.status(500).json({ error: "Failed to upload image" });
+                }
+
+                const { data: publicUrlData } = supabase.storage
+                    .from('product-images')
+                    .getPublicUrl(fileName);
+
+                imageUrl = publicUrlData?.publicUrl || null;
+            } else {
+                imageUrl = `https://storage.supabase.co/mock/${req.file.originalname}`;
             }
-
-            const { data: publicUrlData } = supabase.storage
-                .from('product-images')
-                .getPublicUrl(fileName);
-
-            imageUrl = publicUrlData.publicUrl;
         }
 
         const newProduct = await prisma.product.create({
