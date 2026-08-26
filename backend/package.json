@@ -11,6 +11,7 @@
     "dev": "nodemon index.js",
     "build": "prisma generate",
     "seed": "node prisma/seed.js",
+    "clear:logs": "node scripts/clearLogs.js",
     "start": "node index.js",
     "postinstall": "prisma generate"
   },
