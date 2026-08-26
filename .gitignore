@@ -3,8 +3,16 @@
 **/build/
 frontend/.vite/
 
+# Ignore all actual .env files across all folders
 **/.env
 .env
+**/.env.*
+environments/*.env
+*.env
+
+# Keep example files tracked
+!**/.env.example
+!environments/*.env.example
 
 backend/src/generated/prisma/
 

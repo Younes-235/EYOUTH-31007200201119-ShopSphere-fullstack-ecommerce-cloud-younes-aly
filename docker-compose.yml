@@ -45,9 +45,12 @@ services:
     ports:
       - "5000:5000"
     environment:
+      - PORT=5000
+      - JWT_SECRET=super_secret_jwt_key_deci_level5
+      - DATABASE_URL=postgresql://myuser:mypassword@postgres_db:5432/my_relational_db?schema=public
+      - MONGO_URI=mongodb://rootuser:rootpassword@mongo_db:27017/my_document_db?authSource=admin
       - REVIEW_SERVICE_URL=http://review_service:5001
-    env_file:
-      - ./backend/.env
+      - SERVERLESS_EMAIL_URL=https://shopsphere-serverless-email.vercel.app/api/send-welcome-email
     depends_on:
       - postgres_db
       - mongo_db
@@ -72,4 +75,4 @@ services:
 volumes:
   postgres_data:
   mongo_data:
-  backend_uploads: 
+  backend_uploads:
