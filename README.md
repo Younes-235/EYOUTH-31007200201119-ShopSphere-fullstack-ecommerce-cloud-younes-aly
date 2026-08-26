@@ -71,13 +71,13 @@ Built with **React, Node.js, Express, Prisma ORM, PostgreSQL, MongoDB, Docker, a
 
 # Application URLs
 
-| Service | URL |
-| -------- | --- |
-| Frontend | http://localhost:5173 |
-| Backend API | http://localhost:5000/api |
-| Review Microservice | http://localhost:5001/api/reviews |
-| Serverless Email Function | http://localhost:3000/api/send-welcome-email |
-| Health Checks | http://localhost:5000/health (Backend), http://localhost:5001/health (Reviews) |
+| Service | Cloud Production URL | Local URL |
+| -------- | --------------------- | --------- |
+| **Frontend Application** | https://fullstack-ecommerce-cloud-younes-al-five.vercel.app | http://localhost:5173 |
+| **Main Backend API** | https://fullstack-ecommerce-cloud-younes-al.vercel.app/api | http://localhost:5000/api |
+| **Review Microservice** | https://shopsphere-review-service-umber.vercel.app/api/reviews | http://localhost:5001/api/reviews |
+| **Serverless Email Endpoint** | https://shopsphere-serverless-email.vercel.app/api/send-welcome-email | http://localhost:3000/api/send-welcome-email |
+| **Health Checks** | https://fullstack-ecommerce-cloud-younes-al.vercel.app/health | http://localhost:5000/health |
 
 ---
 
