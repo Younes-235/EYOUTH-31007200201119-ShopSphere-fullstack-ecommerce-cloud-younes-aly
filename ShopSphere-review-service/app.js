@@ -2,8 +2,11 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const feedbackRoutes = require('./routes/feedbackRoutes');
+const structuredLogger = require('./middleware/structuredLogger');
 
 const app = express();
+
+app.use(structuredLogger);
 
 app.use(helmet({
     crossOriginResourcePolicy: { policy: "cross-origin" },

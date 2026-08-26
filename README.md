@@ -226,6 +226,44 @@ TanStack Query keeps product, cart, and profile data synchronized across the app
 
 JWT authentication and role middleware secure all protected endpoints.
 
+### Structured Logging & Production Observability (Task 4.2)
+
+All request entries and error entries carry an ISO-8601 UTC timestamp and a standardized severity level (`INFO`, `WARN`, `ERROR`):
+
+- **Request Entry Example (`INFO` / `WARN`):**
+```json
+{
+  "timestamp": "2026-08-26T20:45:10.123Z",
+  "level": "INFO",
+  "type": "HTTP_REQUEST",
+  "method": "GET",
+  "url": "/api/products",
+  "statusCode": 200,
+  "responseTimeMs": 34.2,
+  "ip": "203.0.113.195"
+}
+```
+
+- **Error Entry Example (`ERROR`):**
+```json
+{
+  "timestamp": "2026-08-26T20:45:12.456Z",
+  "level": "ERROR",
+  "type": "SYSTEM_ERROR",
+  "method": "POST",
+  "url": "/api/orders",
+  "statusCode": 500,
+  "message": "Database transaction failure"
+}
+```
+
+#### Where Production Logs Are Read:
+In production, these logs are streamed directly to **Vercel Runtime Logs / Observability**:
+- **Main Backend Production Logs:** Under Vercel Dashboard ➔ Project `fullstack-ecommerce-cloud-younes-al` ➔ **Logs / Observability** tab.
+- **Review Microservice Logs:** Under Vercel Dashboard ➔ Project `shopsphere-review-service` ➔ **Logs / Observability** tab.
+
+DevOps engineers and graders can filter logs in real time by severity level (`INFO`, `WARN`, `ERROR`), HTTP status code, or timestamp.
+
 ---
 
 # Repository
