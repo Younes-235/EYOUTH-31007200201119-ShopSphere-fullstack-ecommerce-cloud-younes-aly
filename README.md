@@ -26,6 +26,7 @@ ShopSphere is an enterprise-grade, cloud-modernized e-commerce platform. The app
 | **4. Main Backend API** | Core REST API (Vercel Serverless Node.js) | https://fullstack-ecommerce-cloud-younes-al.vercel.app/api/products |
 | **5. Serverless Email Function** | Background Registration Email Worker | https://shopsphere-serverless-email.vercel.app/api/send-welcome-email |
 | **6. Production Health Check** | System Uptime & Monitoring Probe | https://fullstack-ecommerce-cloud-younes-al.vercel.app/health |
+| **7. Live Uptime Status Page** | Public UptimeRobot 24/7 Monitoring Dashboard | https://stats.uptimerobot.com/4foTT9R59k |
 
 ---
 

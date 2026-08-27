@@ -21,6 +21,7 @@
 - **Main Backend API:** https://fullstack-ecommerce-cloud-younes-al.vercel.app/api/products
 - **Serverless Email Function:** https://shopsphere-serverless-email.vercel.app/api/send-welcome-email
 - **Production Health Check:** https://fullstack-ecommerce-cloud-younes-al.vercel.app/health
+- **Live Uptime Status Page:** https://stats.uptimerobot.com/4foTT9R59k
 
 ---
 
