@@ -1,253 +1,77 @@
-# Full-Stack E-Commerce Platform
+# ShopSphere — Enterprise Production and Cloud Modernization
 
-A production-ready full-stack e-commerce application featuring real-time inventory management, role-based access control, automated email notifications, and activity auditing.
-
-Built with **React, Node.js, Express, Prisma ORM, PostgreSQL, MongoDB, Docker, and TanStack Query**.
-
----
-
-## Features
-
-- JWT Authentication (Register / Login)
-- Role-Based Access Control (User & Admin)
-- Dynamic Product Catalog
-  - Search
-  - Category Filtering
-  - Sorting
-- Smart Shopping Cart
-  - Automatic Stock Clamping
-  - Real-Time Synchronization
-- User Dashboard (`/profile`)
-- Admin Dashboard (`/admin`)
-- Audit Log System (`/admin/logs`)
-- Health Check API
-- Protected Routes
-- Dynamic Registration Emails (Nodemailer + Ethereal)
-- Dockerized Full Stack
-- Unit & Integration Testing
+**Student ID:** `EYOUTH-31007200201119`  
+**Student Name:** Younes Aly  
+**Level:** Level 5 Final Project (Digital Egypt Cubs Initiative — DECI)  
 
 ---
 
-# Tech Stack
+## 1. Project Overview
 
-## Frontend
-
-- React 18
-- React Router v6
-- TanStack Query v5
-- Axios
-- Vite
-- Context API
-
-## Backend
-
-- Node.js
-- Express.js
-- Prisma ORM
-- PostgreSQL
-- MongoDB
-- JWT Authentication
-- Bcrypt
-- Nodemailer
-
-## Testing
-
-### Backend
-
-- Jest
-- Supertest
-
-### Frontend
-
-- Vitest
-- React Testing Library
-
-## Infrastructure
-
-- Docker
-- Docker Compose
+ShopSphere is an enterprise-grade, cloud-modernized e-commerce platform. The application has been transitioned from a local monolith into a cloud-native, microservices-driven architecture featuring:
+- **Cloud-Native Frontend & Backend:** Hosted on Vercel with Global Edge Content Delivery Network (CDN) and Serverless Node.js execution.
+- **Managed Cloud Databases:** Supabase PostgreSQL for relational transactions (products, users, orders, carts) and MongoDB Atlas for customer reviews and activity audit trails.
+- **Microservices & Serverless Modernization:** Independent Review Microservice and asynchronous Vercel Serverless Welcome Email Function.
+- **Production Operations:** Automated multi-stage GitHub Actions CI/CD pipeline, branch protection, structured JSON logging, and a zero-downtime rollback strategy.
 
 ---
 
-# Application URLs
+## 2. Live Cloud Endpoints (Sub-task 4.4)
 
-| Service | Cloud Production URL | Local URL |
-| -------- | --------------------- | --------- |
-| **Frontend Application** | https://fullstack-ecommerce-cloud-younes-al-five.vercel.app | http://localhost:5173 |
-| **Main Backend API** | https://fullstack-ecommerce-cloud-younes-al.vercel.app/api | http://localhost:5000/api |
-| **Review Microservice** | https://shopsphere-review-service-umber.vercel.app/api/reviews | http://localhost:5001/api/reviews |
-| **Serverless Email Endpoint** | https://shopsphere-serverless-email.vercel.app/api/send-welcome-email | http://localhost:3000/api/send-welcome-email |
-| **Health Checks** | https://fullstack-ecommerce-cloud-younes-al.vercel.app/health | http://localhost:5000/health |
-
----
-
-# Routes
-
-## Public
-
-```
-/
-/products
-/products/:id
-/login
-/register
-/unauthorized
-```
-
-## Protected (User & Admin)
-
-```
-/cart
-/profile
-```
-
-## Admin Only
-
-```
-/admin
-/admin/logs
-```
+| # Deliverable | Component Role | Live Public URL |
+| :--- | :--- | :--- |
+| **1. Application Frontend** | React Single Page Application (Vercel Edge) | https://fullstack-ecommerce-cloud-younes-al-five.vercel.app |
+| **2. Review Microservice** | Independent Reviews Service (Express & MongoDB Atlas) | https://shopsphere-review-service-umber.vercel.app/api/reviews?productId=1 |
+| **3. GitHub Repository** | Source Code, Kubernetes Manifests & CI/CD Pipeline | https://github.com/Younes-235/fullstack-ecommerce-cloud-younes-aly |
+| **4. Main Backend API** | Core REST API (Vercel Serverless Node.js) | https://fullstack-ecommerce-cloud-younes-al.vercel.app/api/products |
+| **5. Serverless Email Function** | Background Registration Email Worker | https://shopsphere-serverless-email.vercel.app/api/send-welcome-email |
+| **6. Production Health Check** | System Uptime & Monitoring Probe | https://fullstack-ecommerce-cloud-younes-al.vercel.app/health |
 
 ---
 
-# Running the Project
+## 3. Evaluator Test Accounts
 
-## 1. Clone Repository
-
-```bash
-git clone https://github.com/Younes-235/fullstack-ecommerce-younes-aly.git
-
-cd fullstack-ecommerce-younes-aly
-```
+| Role | Email | Password | Features to Test |
+| :--- | :--- | :--- | :--- |
+| **Administrator** | `admin@example.com` | `AdminSecure123!` | Admin Dashboard, Product Management, Activity Audit Logs (`/admin/logs`) |
+| **Customer** | `customer@example.com` | `password123` | Browsing Catalog, Cart Synchronization, Order Checkout, Profile (`/profile`) |
 
 ---
 
-## 2. Configure Environment Variables
+## 4. Technology Stack
 
-Inside the `backend` directory, either:
-
-- Rename the included `.env.example` file to `.env`, **or**
-- Create a new file named `.env` and copy the contents from `.env.example` and put the real data.
-
----
-
-## 3. Run with Docker
-
-```bash
-docker-compose up --build -d
-```
-
-Once the containers have started, the application will be available at:
-
-- **Frontend:** http://localhost:5173
-- **Backend API:** http://localhost:5000/api
-- **Health Check:** http://localhost:5000/health
-
-The `/health` endpoint can be used to confirm that the backend API is running successfully.
+- **Frontend:** React 18, React Router v6, TanStack Query v5, Axios, Vite, Vanilla CSS.
+- **Backend API:** Node.js, Express.js, Prisma ORM, Helmet security headers, CORS origin filtering, Rate Limiting.
+- **Microservices & Serverless:** Express Review Microservice, Vercel Serverless Functions, Nodemailer.
+- **Cloud Databases:** Supabase Managed PostgreSQL (AWS Dublin), MongoDB Atlas (AWS Frankfurt).
+- **Container Orchestration:** Kubernetes Multi-Cloud Namespace Simulation (`aws-simulation` and `gcp-simulation`).
+- **CI/CD & DevOps:** GitHub Actions Automated Multi-Stage Pipeline, Branch Protection Rules.
 
 ---
 
-## 4. Run Tests
+## 5. Structured Logging & Production Observability (Sub-task 4.2)
 
-Backend:
+Structured JSON logging is implemented across all backend services using dedicated middleware (`backend/middleware/structuredLogger.js` and `backend/middleware/errorMiddleware.js`). Every incoming HTTP request and system error is emitted as a JSON object with an ISO timestamp and severity level:
 
-```bash
-docker-compose exec backend_api npm test
-```
-
-Frontend:
-
-```bash
-docker-compose exec frontend_app npm test
-```
-
----
-
-## 5. Stop Containers
-
-Stop containers while preserving data:
-
-```bash
-docker-compose stop
-```
-
-Remove containers, networks, and volumes:
-
-```bash
-docker-compose down -v
-```
-
----
-
-# Test Accounts
-
-## Admin
-
-```text
-Email: admin@example.com
-Password: AdminSecure123!
-```
-
-## Customer
-
-```text
-Email: customer@example.com
-Password: password123
-```
-
----
-
-# Technical Highlights
-
-### Inventory Protection
-
-Cart quantities automatically clamp to available inventory in real time.
-
-### Activity Logging
-
-Tracks:
-
-- PRODUCT_CREATED
-- PRODUCT_UPDATED
-- PRODUCT_DELETED
-- USER_REGISTERED
-- ORDER_PLACED
-- ORDER_STATUS_UPDATED
-
-### Automated Emails
-
-Every user registration generates a temporary Ethereal inbox through Nodemailer. (The inbox link can be found in the terminal after registration)
-
-### Optimized Caching
-
-TanStack Query keeps product, cart, and profile data synchronized across the application.
-
-### Security
-
-JWT authentication and role middleware secure all protected endpoints.
-
-### Structured Logging & Production Observability (Task 4.2)
-
-All request entries and error entries carry an ISO-8601 UTC timestamp and a standardized severity level (`INFO`, `WARN`, `ERROR`):
-
-- **Request Entry Example (`INFO` / `WARN`):**
+### Sample Request Entry:
 ```json
 {
-  "timestamp": "2026-08-26T20:45:10.123Z",
+  "timestamp": "2026-08-27T09:02:31.171Z",
   "level": "INFO",
   "type": "HTTP_REQUEST",
   "method": "GET",
   "url": "/api/products",
   "statusCode": 200,
-  "responseTimeMs": 34.2,
-  "ip": "203.0.113.195"
+  "responseTimeMs": 18.91,
+  "ip": "::1",
+  "userAgent": "Mozilla/5.0..."
 }
 ```
 
-- **Error Entry Example (`ERROR`):**
+### Sample Error Entry:
 ```json
 {
-  "timestamp": "2026-08-26T20:45:12.456Z",
+  "timestamp": "2026-08-27T09:02:35.402Z",
   "level": "ERROR",
   "type": "SYSTEM_ERROR",
   "method": "POST",
@@ -257,15 +81,15 @@ All request entries and error entries carry an ISO-8601 UTC timestamp and a stan
 }
 ```
 
-#### Where Production Logs Are Read:
-In production, these logs are streamed directly to **Vercel Runtime Logs / Observability**:
-- **Main Backend Production Logs:** Under Vercel Dashboard ➔ Project `fullstack-ecommerce-cloud-younes-al` ➔ **Logs / Observability** tab.
-- **Review Microservice Logs:** Under Vercel Dashboard ➔ Project `shopsphere-review-service` ➔ **Logs / Observability** tab.
-
-DevOps engineers and graders can filter logs in real time by severity level (`INFO`, `WARN`, `ERROR`), HTTP status code, or timestamp.
+### Where Logs Are Read:
+- **Production Runtime Logs:** Streamed live in the **Vercel Project Dashboard ➔ Logs / Observability Tab**.
+- **Public CI/CD Verification (GitHub Workflows):** When the automated test suite runs during GitHub Actions workflows (`.github/workflows/ci.yml`), the structured JSON logs are printed live in the public **GitHub Actions ➔ Build & Test (CI)** run output. Anyone can open the Actions tab on the repository to see the structured JSON output with timestamps and levels.
 
 ---
 
-# Repository
+## 6. Project Documentation & Deliverables
 
-https://github.com/Younes-235/fullstack-ecommerce-younes-aly
+- 📄 [`EYOUTH-31007200201119-ShopSphere.md`](./EYOUTH-31007200201119-ShopSphere.md) — Master links and project sharing document (Sub-task 4.4).
+- 📄 [`EYOUTH-31007200201119-ShopSphere-Task2.md`](./EYOUTH-31007200201119-ShopSphere-Task2.md) — Cloud architecture diagram, service classification, and Kubernetes simulation (Task 2).
+- 📄 [`EYOUTH-31007200201119-ShopSphere-ADR.md`](./EYOUTH-31007200201119-ShopSphere-ADR.md) — Architecture Decision Record for microservice and serverless choices (Sub-task 3.4).
+- 📄 [`EYOUTH-31007200201119-ShopSphere-RollbackPlan.md`](./EYOUTH-31007200201119-ShopSphere-RollbackPlan.md) — 1-Page production incident rollback plan (Sub-task 4.3).
