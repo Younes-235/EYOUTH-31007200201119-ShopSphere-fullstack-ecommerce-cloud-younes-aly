@@ -1,26 +1,27 @@
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 40px 20px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  color: #333;
+  padding: 40px 24px;
 }
 
 .backBtn {
   background: none;
   border: none;
-  color: #666;
+  color: var(--text-secondary);
   font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
   padding: 0;
   margin-bottom: 24px;
   display: inline-flex;
   align-items: center;
-  transition: color 0.2s ease;
+  gap: 6px;
+  transition: color 0.15s ease, transform 0.15s ease;
 }
 
 .backBtn:hover {
-  color: #000;
+  color: var(--primary);
+  transform: translateX(-3px);
 }
 
 .mainLayout {
@@ -34,24 +35,25 @@
   min-width: 0;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  background-color: #f9f9f9;
-  border-radius: 12px;
+  align-items: center;
+  background-color: var(--bg-alt);
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  border: 1px solid #eee;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-card);
 }
 
 .imageSection img {
   width: 100%;
   height: auto;
-  max-height: 500px;
+  max-height: 480px;
   object-fit: contain;
   display: block;
 }
 
 .noImage {
   padding: 100px 20px;
-  color: #999;
+  color: var(--text-muted);
   font-style: italic;
   text-align: center;
   font-size: 1.1rem;
@@ -65,108 +67,114 @@
 
 .badge {
   align-self: flex-start;
-  background-color: #f0f0f0;
-  color: #666;
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  font-weight: 600;
+  background-color: var(--primary-light);
+  color: var(--primary);
+  border: 1px solid var(--primary-border);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.82rem;
+  font-weight: 700;
   text-transform: uppercase;
   margin-bottom: 16px;
   letter-spacing: 0.5px;
 }
 
 .title {
-  font-size: 2.5rem;
+  font-size: 2.4rem;
   margin: 0 0 12px 0;
-  font-weight: 700;
+  font-weight: 800;
   line-height: 1.2;
+  color: var(--text-primary);
+  letter-spacing: -0.5px;
 }
 
 .price {
   font-size: 1.8rem;
-  font-weight: 600;
-  color: #2c3e50;
-  margin: 0 0 20px 0;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0 0 16px 0;
 }
 
 .stockStatus {
-  font-size: 1rem;
+  font-size: 0.95rem;
   margin-bottom: 24px;
-  color: #555;
+  color: var(--text-secondary);
 }
 
 .inStock {
-  color: #27ae60;
-  font-weight: 600;
+  color: var(--success);
+  font-weight: 700;
 }
 
 .outOfStock {
-  color: #c0392b;
-  font-weight: 600;
+  color: var(--danger);
+  font-weight: 700;
 }
 
 .description {
   font-size: 1.05rem;
-  line-height: 1.6;
-  color: #555;
+  line-height: 1.65;
+  color: var(--text-secondary);
   margin: 0 0 32px 0;
 }
 
 .cartBtn {
-  background-color: #0070f3;
-  color: white;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+  color: #ffffff;
   border: none;
   padding: 16px 32px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  border-radius: 8px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  border-radius: var(--radius-md);
   cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.1s ease;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.15s ease, opacity 0.15s ease;
   width: 100%;
   max-width: 350px;
 }
 
 .cartBtn:hover:not(:disabled) {
-  background-color: #0051a8;
-}
-
-.cartBtn:active:not(:disabled) {
-  transform: scale(0.98);
+  opacity: 0.92;
+  transform: translateY(-2px);
 }
 
 .cartBtn:disabled {
-  background-color: #ccc;
-  color: #777;
+  background-color: var(--border-color);
+  color: var(--text-muted);
   cursor: not-allowed;
 }
 
 .divider {
   border: 0;
-  border-top: 1px solid #eee;
+  border-top: 1px solid var(--border-color);
   margin: 40px 0;
 }
 
 .reviewsSection {
-  max-width: 750px;
+  max-width: 800px;
 }
 
 .reviewsSection h2 {
-  font-size: 1.75rem;
+  font-size: 1.8rem;
+  font-weight: 800;
   margin-bottom: 24px;
+  color: var(--text-primary);
 }
 
 .feedbackForm {
-  background-color: #f8f9fa;
-  border: 1px solid #eaeaea;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
   padding: 24px;
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
   margin-bottom: 32px;
+  box-shadow: var(--shadow-sm);
 }
 
 .feedbackForm h3 {
   margin: 0 0 16px 0;
   font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
 }
 
 .formRow {
@@ -174,18 +182,21 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  color: var(--text-primary);
 }
 
 .formRow label {
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .formRow select {
-  padding: 8px 12px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
   font-size: 0.95rem;
-  background-color: #fff;
+  background-color: var(--bg-alt);
+  color: var(--text-primary);
+  outline: none;
 }
 
 .formGroup {
@@ -194,44 +205,46 @@
 
 .formGroup textarea {
   width: 100%;
-  padding: 12px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
+  padding: 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  font-size: 0.95rem;
   resize: vertical;
   box-sizing: border-box;
   font-family: inherit;
+  background-color: var(--bg-alt);
+  color: var(--text-primary);
+  outline: none;
 }
 
 .formGroup textarea:focus, .formRow select:focus {
-  outline: none;
-  border-color: #0070f3;
+  border-color: var(--primary);
 }
 
 .submitReviewBtn {
-  background-color: #333;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
   color: #fff;
   border: none;
-  padding: 10px 20px;
+  padding: 10px 24px;
   font-size: 0.95rem;
-  font-weight: 500;
-  border-radius: 6px;
+  font-weight: 600;
+  border-radius: var(--radius-md);
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: opacity 0.15s ease;
 }
 
 .submitReviewBtn:hover {
-  background-color: #000;
+  opacity: 0.92;
 }
 
 .loginNotice {
-  color: #666;
-  font-style: italic;
-  background-color: #fff8e1;
-  padding: 12px 16px;
-  border-radius: 6px;
-  border-left: 4px solid #ffb300;
+  color: var(--warning);
+  background-color: var(--warning-light);
+  padding: 14px 18px;
+  border-radius: var(--radius-md);
+  border-left: 4px solid var(--warning);
   margin-bottom: 32px;
+  font-size: 0.95rem;
 }
 
 .reviewsList {
@@ -241,15 +254,16 @@
 }
 
 .noReviews {
-  color: #777;
+  color: var(--text-muted);
   font-style: italic;
 }
 
 .reviewCard {
-  border: 1px solid #eee;
+  border: 1px solid var(--border-color);
   padding: 20px;
-  border-radius: 8px;
-  background-color: #fff;
+  border-radius: var(--radius-md);
+  background-color: var(--bg-card);
+  box-shadow: var(--shadow-sm);
 }
 
 .reviewHeader {
@@ -261,6 +275,7 @@
 
 .reviewHeader strong {
   font-size: 1.05rem;
+  color: var(--text-primary);
 }
 
 .stars {
@@ -269,30 +284,20 @@
 
 .reviewBody {
   margin: 0 0 12px 0;
-  line-height: 1.5;
-  color: #444;
+  line-height: 1.55;
+  color: var(--text-secondary);
 }
 
 .reviewDate {
   font-size: 0.8rem;
-  color: #999;
+  color: var(--text-muted);
 }
 
 .loading, .error {
   text-align: center;
   padding: 80px 20px;
   font-size: 1.2rem;
-  color: #666;
-}
-
-.error button {
-  margin-top: 16px;
-  padding: 8px 16px;
-  background-color: #0070f3;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+  color: var(--text-secondary);
 }
 
 @media (max-width: 768px) {
@@ -302,7 +307,7 @@
   }
   
   .title {
-    font-size: 1.8rem;
+    font-size: 1.9rem;
   }
   
   .cartBtn {

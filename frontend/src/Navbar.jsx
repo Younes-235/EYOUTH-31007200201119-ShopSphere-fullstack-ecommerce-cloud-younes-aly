@@ -1,10 +1,12 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
+import { useTheme } from "./ThemeContext";
 import styles from "./Navbar.module.css"; 
 
 export default function Navbar() {
   const { user, logout } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -15,7 +17,10 @@ export default function Navbar() {
   return (
     <nav className={styles.navbar}>
       <div className={styles.brandZone}>
-        <Link to="/" className={styles.logo}>🛍️ E-Store</Link>
+        <Link to="/" className={styles.logo}>
+          <span className={styles.logoIcon}>🛍️</span>
+          <span className={styles.logoText}>ShopSphere</span>
+        </Link>
       </div>
 
       <div className={styles.linksZone}>
@@ -31,17 +36,27 @@ export default function Navbar() {
 
         {user?.role === "admin" && (
           <>
-            <Link to="/admin" className={styles.adminLink}>Admin Settings</Link>
+            <Link to="/admin" className={styles.adminLink}>Admin Panel</Link>
             <Link to="/admin/logs" className={styles.adminLink}>Activity Logs</Link>
           </>
         )}
       </div>
 
       <div className={styles.authZone}>
+        {/* Theme Toggle Button */}
+        <button 
+          onClick={toggleTheme} 
+          className={styles.themeBtn}
+          title={theme === "light" ? "Switch to Dark Mode" : "Switch to Light Mode"}
+          aria-label="Toggle Theme"
+        >
+          {theme === "light" ? "🌙" : "☀️"}
+        </button>
+
         {user ? (
           <div className={styles.userStatus}>
             <span className={styles.welcomeText}>
-              Logged in as: <strong>{user.email}</strong>
+              <strong>{user.email}</strong>
             </span>
             <button onClick={handleLogout} className={styles.logoutButton}>
               Logout
