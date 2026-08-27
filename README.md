@@ -22,7 +22,7 @@ ShopSphere is an enterprise-grade, cloud-modernized e-commerce platform. The app
 | :--- | :--- | :--- |
 | **1. Application Frontend** | React Single Page Application (Vercel Edge) | https://fullstack-ecommerce-cloud-younes-al-five.vercel.app |
 | **2. Review Microservice** | Independent Reviews Service (Express & MongoDB Atlas) | https://shopsphere-review-service-umber.vercel.app/api/reviews?productId=1 |
-| **3. GitHub Repository** | Source Code, Kubernetes Manifests & CI/CD Pipeline | https://github.com/Younes-235/fullstack-ecommerce-cloud-younes-aly |
+| **3. GitHub Repository** | Source Code, Kubernetes Manifests & CI/CD Pipeline | https://github.com/Younes-235/EYOUTH-31007200201119-ShopSphere-fullstack-ecommerce-cloud-younes-aly |
 | **4. Main Backend API** | Core REST API (Vercel Serverless Node.js) | https://fullstack-ecommerce-cloud-younes-al.vercel.app/api/products |
 | **5. Serverless Email Function** | Background Registration Email Worker | https://shopsphere-serverless-email.vercel.app/api/send-welcome-email |
 | **6. Production Health Check** | System Uptime & Monitoring Probe | https://fullstack-ecommerce-cloud-younes-al.vercel.app/health |

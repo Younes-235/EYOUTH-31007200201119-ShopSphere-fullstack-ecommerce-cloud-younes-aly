@@ -12,7 +12,7 @@
 | :--- | :--- | :--- |
 | **1. Application** | React Single Page Application (Frontend) | https://fullstack-ecommerce-cloud-younes-al-five.vercel.app |
 | **2. Review Service** | Customer Reviews Microservice (Express & MongoDB) | https://shopsphere-review-service-umber.vercel.app/api/reviews?productId=1 |
-| **3. Repository** | GitHub Source Code & CI/CD Pipeline | https://github.com/Younes-235/fullstack-ecommerce-cloud-younes-aly |
+| **3. Repository** | GitHub Source Code & CI/CD Pipeline | https://github.com/Younes-235/EYOUTH-31007200201119-ShopSphere-fullstack-ecommerce-cloud-younes-aly |
 
 ---
 
