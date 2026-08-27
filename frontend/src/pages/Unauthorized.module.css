@@ -1,22 +1,38 @@
-.block {
-    text-align: center;
-    margin-top: 100px;
-    font-family: system-ui, -apple-system, sans-serif;
+.container {
+  max-width: 500px;
+  margin: 100px auto;
+  text-align: center;
+  padding: 40px 24px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
 }
-.block h1 {
-    font-size: 3.5rem;
-    color: #e53e3e;
-    margin-bottom: 10px;
+
+.title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--danger);
+  margin-bottom: 12px;
 }
-.block p {
-    color: #4a5568;
-    margin-bottom: 25px;
+
+.message {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  margin-bottom: 24px;
 }
-.link {
-    color: #0070f3;
-    text-decoration: none;
-    font-weight: 600;
+
+.backButton {
+  display: inline-block;
+  padding: 12px 24px;
+  background: var(--primary);
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  transition: opacity 0.15s ease;
 }
-.link:hover {
-    text-decoration: underline;
+
+.backButton:hover {
+  opacity: 0.92;
 }

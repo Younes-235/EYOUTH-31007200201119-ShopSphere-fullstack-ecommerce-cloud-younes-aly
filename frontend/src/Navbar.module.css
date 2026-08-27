@@ -1,114 +1,189 @@
 .navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 14px 28px;
-  background-color: #ffffff;
-  border-bottom: 1px solid #e2e8f0;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
-  font-family: system-ui, sans-serif;
+  padding: 14px 32px;
+  background-color: var(--bg-navbar);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+}
+
+.brandZone {
+  display: flex;
+  align-items: center;
 }
 
 .logo {
-  font-weight: 700;
-  font-size: 1.2rem;
-  color: #0f172a;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: var(--text-primary);
   text-decoration: none;
+  letter-spacing: -0.5px;
+}
+
+.logoIcon {
+  font-size: 1.4rem;
+}
+
+.logoText {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .linksZone {
   display: flex;
-  gap: 24px;
+  gap: 20px;
   align-items: center;
 }
 
 .navLink {
   text-decoration: none;
-  color: #475569;
+  color: var(--text-secondary);
   font-weight: 500;
   font-size: 0.95rem;
-  transition: color 0.2s ease;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  transition: all 0.15s ease;
 }
 
 .navLink:hover {
-  color: #0f172a;
+  color: var(--primary);
+  background-color: var(--primary-light);
 }
 
 .adminLink {
   text-decoration: none;
-  color: #7c3aed;
+  color: var(--accent);
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.92rem;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  background-color: var(--accent-light);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  transition: all 0.15s ease;
 }
 
 .adminLink:hover {
-  color: #6d28d9;
+  background-color: var(--accent);
+  color: #ffffff;
 }
 
 .authZone {
   display: flex;
   align-items: center;
+  gap: 16px;
+}
+
+.themeBtn {
+  background: var(--bg-alt);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.themeBtn:hover {
+  transform: scale(1.1);
+  border-color: var(--primary);
 }
 
 .userStatus {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
 }
 
 .welcomeText {
-  font-size: 0.9rem;
-  color: #64748b;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
 }
 
 .welcomeText strong {
-  color: #1e293b;
+  color: var(--text-primary);
 }
 
 .logoutButton {
-  padding: 8px 14px;
-  background-color: #ef4444;
-  color: #ffffff;
-  border: none;
-  border-radius: 6px;
-  font-weight: 500;
+  padding: 7px 14px;
+  background-color: var(--danger-light);
+  color: var(--danger);
+  border: 1px solid var(--danger);
+  border-radius: var(--radius-sm);
+  font-weight: 600;
   cursor: pointer;
-  font-size: 0.9rem;
-  transition: background-color 0.2s ease;
+  font-size: 0.88rem;
+  transition: all 0.15s ease;
 }
 
 .logoutButton:hover {
-  background-color: #dc2626;
+  background-color: var(--danger);
+  color: #ffffff;
 }
 
 .guestButtons {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
 }
 
 .loginLink {
   text-decoration: none;
-  color: #2563eb;
-  font-weight: 500;
+  color: var(--text-secondary);
+  font-weight: 600;
   font-size: 0.9rem;
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  transition: all 0.15s ease;
 }
 
 .loginLink:hover {
-  text-decoration: underline;
+  color: var(--primary);
+  background-color: var(--primary-light);
 }
 
 .registerButton {
   text-decoration: none;
   padding: 8px 16px;
-  background-color: #2563eb;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
   color: #ffffff;
-  border-radius: 6px;
-  font-weight: 500;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
   font-size: 0.9rem;
-  transition: background-color 0.2s ease;
+  box-shadow: var(--shadow-sm);
+  transition: opacity 0.15s ease, transform 0.15s ease;
 }
 
 .registerButton:hover {
-  background-color: #1d4ed8;
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 12px 16px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .linksZone {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    gap: 8px;
+    overflow-x: auto;
+  }
 }
