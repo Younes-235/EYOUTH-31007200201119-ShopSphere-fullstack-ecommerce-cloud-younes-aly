@@ -1,8 +1,10 @@
 const Feedback = require('../models/Feedback.js');
+const connectMongoDB = require('../config/mongoDb.js');
 
 // GET /api/reviews?productId=X
 exports.getReviews = async (req, res) => {
     try {
+        await connectMongoDB();
         const { productId } = req.query;
 
         if (!productId) {
@@ -20,6 +22,7 @@ exports.getReviews = async (req, res) => {
 // POST /api/reviews
 exports.createReview = async (req, res) => {
     try {
+        await connectMongoDB();
         const { productId, userId, username, rating, comment } = req.body;
 
         if (!productId || !userId || !username || !rating || !comment) {
@@ -44,6 +47,7 @@ exports.createReview = async (req, res) => {
 // DELETE /api/reviews?productId=X
 exports.deleteReviewsByProduct = async (req, res) => {
     try {
+        await connectMongoDB();
         const { productId } = req.query;
 
         if (!productId) {
