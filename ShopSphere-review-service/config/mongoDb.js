@@ -1,15 +1,48 @@
 const mongoose = require('mongoose');
 
+let cachedConnection = global.mongooseReview;
+
+if (!cachedConnection) {
+  cachedConnection = global.mongooseReview = { conn: null, promise: null };
+}
+
 const connectMongoDB = async () => {
-    try {
-        const mongoURI = process.env.MONGO_URI;
-        
-        await mongoose.connect(mongoURI);
-        console.log('Review service successfully connected to MongoDB!');
-    } catch (error) {
-        console.error('MongoDB connection failure:', error);
-        process.exit(1);
-    }
+  const mongoURI = process.env.MONGO_URI;
+
+  if (!mongoURI) {
+    console.warn('⚠️ MONGO_URI is not defined in environment variables.');
+    return null;
+  }
+
+  if (cachedConnection.conn && mongoose.connection.readyState === 1) {
+    return cachedConnection.conn;
+  }
+
+  if (!cachedConnection.promise) {
+    const opts = {
+      bufferCommands: false,
+      serverSelectionTimeoutMS: 5000,
+      connectTimeoutMS: 5000,
+    };
+
+    cachedConnection.promise = mongoose.connect(mongoURI, opts).then((mongooseInstance) => {
+      console.log('Review service successfully connected to MongoDB!');
+      return mongooseInstance;
+    }).catch((err) => {
+      cachedConnection.promise = null;
+      console.error('MongoDB connection failure:', err);
+      throw err;
+    });
+  }
+
+  try {
+    cachedConnection.conn = await cachedConnection.promise;
+  } catch (e) {
+    cachedConnection.promise = null;
+    throw e;
+  }
+
+  return cachedConnection.conn;
 };
 
 module.exports = connectMongoDB;
